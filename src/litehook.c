@@ -173,11 +173,11 @@ const char *litehook_locate_dsc(void)
 			strlcpy(dscPath, dyldSharedCacheDir, PATH_MAX);
 			strlcat(dscPath, "/dyld_shared_cache", PATH_MAX);
 		}
-		else if (!access("/System/Library/Caches/com.apple.dyld", F_OK)) /* iOS <=15 */ {
-			strlcpy(dscPath, "/System/Library/Caches/com.apple.dyld/dyld_shared_cache", PATH_MAX);
-		}
 		else if (!access("/private/preboot/Cryptexes/OS/System/Library/Caches/com.apple.dyld", F_OK)) /* iOS >=16 */ {
 			strlcpy(dscPath, "/private/preboot/Cryptexes/OS/System/Library/Caches/com.apple.dyld/dyld_shared_cache", PATH_MAX);
+		}
+		else if (!access("/System/Library/Caches/com.apple.dyld", F_OK)) /* iOS <=15 */ {
+			strlcpy(dscPath, "/System/Library/Caches/com.apple.dyld/dyld_shared_cache", PATH_MAX);
 		}
 
 		const char *suffixCandidates[] = {
